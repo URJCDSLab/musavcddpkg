@@ -114,7 +114,7 @@ pkgload::load_all(".")
 myApp()
 ```
 
-En este caso, es mejor añadir {pkgload} al archivo `DESCRIPTION`:
+En este caso, es mejor añadir también {pkgload} al archivo `DESCRIPTION`:
 
 ```r
 usethis::use_package("pkgload")
