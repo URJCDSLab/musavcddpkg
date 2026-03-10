@@ -63,6 +63,15 @@ El segundo método (preferido) automáticamente añade lo necesario al archivo `
 devtools::document()
 ```
 
+El resto de dependencias de la aplicación se puede completar con estos "imports":
+
+```r
+usethis::use_import_from("bslib", "nav_panel")
+usethis::use_import_from("reactable", c("reactableOutput", "reactable", "renderReactable"))
+usethis::use_import_from("ggplot2", c("ggplot", "geom_line", "aes"))
+usethis::use_import_from("dplyr", c("filter", "group_by", "summarise"))
+```
+
 ## Datos del paquete
 
 Véase capítulo Data en R Packages: <https://r-pkgs.org/data.html>
@@ -88,8 +97,27 @@ usethis::use_data(resultados, overwrite = TRUE)
 
 ## Código de la aplicación
 
-Arriba habíamos creado el archivo `app.R`, donde se ha copiado el código principal de la aplicación (creación de UI y Server, que se podría separar en dos archivos). Añadimos un ejemplo de módulo, donde se ha copiado el módulo de ejemplo.
+Arriba habíamos creado el archivo `app.R`, donde se ha copiado el código principal de la aplicación (creación de UI y Server, que se podría separar en dos archivos). Añadimos un ejemplo de módulo, donde se ha copiado el módulo de ejemplo, sacándolo del script principal.
 
 ```r
 usethis::use_r("modulo_seleccion.R")
 ```
+
+El código de la aplicación hay que encapsularlo dentro de una función, véase el código definitivo de `app.R`. Si se ha separado el código de UI y el de Server, se puede crear otro script con la función que llame a `shinyAppp()`.
+
+## Despliegue como paquete
+
+Si queremos desplegar una aplicación de este estilo por ejemplo en posit connect cloud o en shinyapps.io, es necesario crear un nuevo archivo `app.R` en el directorio raíz del proyecto (no en la carpeta R) con el siguiente contenido:
+
+```r
+pkgload::load_all(".")
+myApp()
+```
+
+En este caso, es mejor añadir {pkgload} al archivo `DESCRIPTION`:
+
+```r
+usethis::use_package("pkgload")
+```
+
+
