@@ -120,4 +120,10 @@ En este caso, es mejor añadir {pkgload} al archivo `DESCRIPTION`:
 usethis::use_package("pkgload")
 ```
 
+## Acceso a bases de datos y otros recursos
 
+Si la aplicación accede a bases de datos, los datos de la conexión se deben cargar al iniciar la aplicación. Se puede poner el código en un script aparte dentro de la carpeta R, dentro del script de la app, o dentro de la función `.onLoad()`. Esta función se suele meter en un script llamado `zzz.R` por si necesita alguna función de las creadas en otros scripts. 
+
+Además, es importante que las credenciales de acceso no estén dentro del código, sino como variables de entorno en el archivo `.Renviron`, que en ningún caso se comparte en los repositorios (añadir a `.gitignore`). En este ejemplo ilustrativo se comparte para ver la estructura, faltaría añadir los datos reales en local para que funcione.
+
+Si la aplicación va a utilizar otros archivos que deban ser accesibles desde la aplicación (por ejemplo, una imagen con el logotipo de la aplicación), en la función `onLoad()` se incluye también el código necesario para acceder a estos archivos, que estarán dentro de la carpeta `inst` del paquete.
