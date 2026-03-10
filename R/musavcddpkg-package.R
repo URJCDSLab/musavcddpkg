@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom shiny *
+#' @import shiny
+#' @importFrom lubridate year
 ## usethis namespace: end
 NULL

@@ -1,9 +1,3 @@
-library(shiny)  
-library(bslib)
-library(reactable)
-library(ggplot2)
-library(dplyr)
-library(lubridate)
 resultados <- read.csv("data/results.csv")
 seleccion_ui <- function(id) {
   ns <- NS(id) # Crea un espacio de nombres para el módulo
@@ -42,4 +36,4 @@ server <- function(input, output, session) {
     resultados |> filter(home_team == pais2$pais()) |> reactable()
   })
 }
-shinyApp(ui, server)
+# shinyApp(ui, server)
